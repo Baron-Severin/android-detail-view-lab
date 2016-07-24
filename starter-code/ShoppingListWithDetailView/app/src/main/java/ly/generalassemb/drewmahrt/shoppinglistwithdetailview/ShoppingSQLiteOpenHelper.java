@@ -41,8 +41,17 @@ public class ShoppingSQLiteOpenHelper extends SQLiteOpenHelper{
                     COL_ITEM_PRICE + " TEXT, " +
                     COL_ITEM_TYPE + " TEXT )";
 
-    public ShoppingSQLiteOpenHelper(Context context) {
+    private static ShoppingSQLiteOpenHelper instance;
+
+    private ShoppingSQLiteOpenHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
+    public static ShoppingSQLiteOpenHelper getInstance(Context context) {
+        if (instance == null) {
+            instance = new ShoppingSQLiteOpenHelper(context);
+        }
+        return instance;
     }
 
     @Override
